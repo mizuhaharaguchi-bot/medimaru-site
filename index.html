@@ -1,11 +1,488 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>株式会社めでぃまる</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>めでぃまる | 医療の情報を、やさしく伝える。</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Yu Gothic UI", "Hiragino Sans", sans-serif;
+      line-height: 1.8;
+      color: #334155;
+      background: #f8fdff;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #e6f2f7;
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 700;
+      color: #3b82f6;
+      letter-spacing: 0.03em;
+    }
+
+    nav a {
+      margin-left: 24px;
+      font-size: 14px;
+      color: #64748b;
+      transition: 0.2s;
+    }
+
+    nav a:hover {
+      color: #3b82f6;
+    }
+
+    .hero {
+      padding: 100px 0 80px;
+      background:
+        radial-gradient(circle at top right, #dff6ff 0%, transparent 30%),
+        radial-gradient(circle at left center, #eafcff 0%, transparent 28%),
+        linear-gradient(180deg, #f8fdff 0%, #eef9ff 100%);
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-size: 52px;
+      line-height: 1.3;
+      color: #1e3a5f;
+      margin-bottom: 22px;
+    }
+
+    .hero-text p {
+      font-size: 18px;
+      color: #5b7088;
+      max-width: 620px;
+      margin-bottom: 32px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 26px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: 0.2s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #60a5fa, #38bdf8);
+      color: white;
+      box-shadow: 0 10px 25px rgba(56, 189, 248, 0.22);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      opacity: 0.96;
+    }
+
+    .btn-secondary {
+      background: white;
+      color: #3b82f6;
+      border: 1px solid #d9eef8;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.05);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-1px);
+    }
+
+    .hero-card {
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid #e2f1f8;
+      border-radius: 28px;
+      padding: 30px;
+      box-shadow: 0 18px 40px rgba(103, 177, 220, 0.12);
+    }
+
+    .hero-card h2 {
+      font-size: 20px;
+      color: #1e3a5f;
+      margin-bottom: 16px;
+    }
+
+    .hero-card ul {
+      list-style: none;
+    }
+
+    .hero-card li {
+      padding: 12px 0;
+      border-bottom: 1px dashed #d9edf7;
+      color: #5b7088;
+    }
+
+    .hero-card li:last-child {
+      border-bottom: none;
+    }
+
+    section {
+      padding: 84px 0;
+    }
+
+    .section-title {
+      font-size: 34px;
+      color: #1e3a5f;
+      margin-bottom: 14px;
+      text-align: center;
+    }
+
+    .section-lead {
+      text-align: center;
+      color: #6b7f95;
+      max-width: 720px;
+      margin: 0 auto 42px;
+    }
+
+    .about-box {
+      background: white;
+      border: 1px solid #e3f1f8;
+      border-radius: 28px;
+      padding: 38px;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.05);
+      max-width: 900px;
+      margin: 0 auto;
+      color: #526477;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid #e4f2f8;
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+    }
+
+    .card .icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      background: linear-gradient(135deg, #e0f2fe, #f0f9ff);
+      margin-bottom: 18px;
+    }
+
+    .card h3 {
+      font-size: 20px;
+      color: #1e3a5f;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: #63778c;
+      font-size: 15px;
+    }
+
+    .features {
+      background: linear-gradient(180deg, #f6fcff 0%, #eef8fd 100%);
+    }
+
+    .company-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .company-info {
+      background: white;
+      border: 1px solid #e4f0f7;
+      border-radius: 28px;
+      padding: 38px;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.05);
+    }
+
+    .company-info dl {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 14px 20px;
+    }
+
+    .company-info dt {
+      font-weight: 700;
+      color: #4b6b88;
+    }
+
+    .company-info dd {
+      color: #5b7088;
+    }
+
+    .cta {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+      background: linear-gradient(135deg, #ffffff, #eef9ff);
+      border: 1px solid #dceff8;
+      border-radius: 32px;
+      padding: 60px 24px;
+      box-shadow: 0 15px 35px rgba(103, 177, 220, 0.10);
+    }
+
+    .cta p {
+      color: #667b90;
+      margin: 16px auto 26px;
+      max-width: 620px;
+    }
+
+    footer {
+      padding: 30px 0 44px;
+      text-align: center;
+      font-size: 14px;
+      color: #7a8da1;
+    }
+
+    @media (max-width: 860px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-text h1 {
+        font-size: 40px;
+      }
+
+      nav {
+        display: none;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .hero {
+        padding: 80px 0 60px;
+      }
+
+      .hero-text h1 {
+        font-size: 32px;
+      }
+
+      .section-title {
+        font-size: 28px;
+      }
+
+      .company-info dl {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>株式会社めでぃまる</h1>
-  <p>本サイトは現在準備中です。</p>
+
+  <header>
+    <div class="container header-inner">
+      <div class="logo">めでぃまる</div>
+      <nav>
+        <a href="#about">私たちについて</a>
+        <a href="#services">サービス</a>
+        <a href="#strength">強み</a>
+        <a href="#company">会社情報</a>
+        <a href="#contact">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <h1>医療の情報を、<br>やさしく伝える。</h1>
+        <p>
+          めでぃまるは、医療・介護の現場で生まれる情報を、
+          患者さん・ご家族・施設にとってわかりやすい形へ整えることを目指す会社です。
+        </p>
+        <div class="hero-buttons">
+          <a href="#contact" class="btn btn-primary">お問い合わせ</a>
+          <a href="#services" class="btn btn-secondary">サービスを見る</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <h2>めでぃまるが目指すこと</h2>
+        <ul>
+          <li>伝わりにくい医療情報を、わかりやすく整理する</li>
+          <li>患者さんやご家族に届く説明の形を考える</li>
+          <li>現場で使いやすい仕組みへつなげていく</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title">私たちについて</h2>
+      <p class="section-lead">
+        専門的な情報ほど、受け取る相手に合わせてやさしく整えることが大切です。
+        めでぃまるは、その“伝わり方”を大事にしています。
+      </p>
+
+      <div class="about-box">
+        医療や介護の現場では、大切な説明や会話が日々たくさん生まれています。
+        しかし、その内容は専門的で難しく、患者さんやご家族に十分伝わらないこともあります。
+        めでぃまるは、そうした情報を整理し、見やすく、伝わりやすく、活用しやすい形へ整えることを目指しています。
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="container">
+      <h2 class="section-title">サービス</h2>
+      <p class="section-lead">
+        企画段階でも、「何をしている会社か」が自然に伝わる見せ方を意識しています。
+      </p>
+
+      <div class="cards">
+        <div class="card">
+          <div class="icon">📝</div>
+          <h3>情報整理支援</h3>
+          <p>
+            会話や説明内容を整理し、関係者が理解しやすい形にまとめるための支援を行います。
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="icon">💡</div>
+          <h3>レポート設計</h3>
+          <p>
+            患者さんやご家族、施設向けに、やさしく伝わる報告の形を設計します。
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🌱</div>
+          <h3>PoC支援</h3>
+          <p>
+            小さく試しながら、現場で使える仕組みへ育てていくための支援を行います。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="strength" class="features">
+    <div class="container">
+      <h2 class="section-title">めでぃまるの強み</h2>
+      <p class="section-lead">
+        ただ情報をまとめるだけでなく、受け手にとってのわかりやすさを大切にします。
+      </p>
+
+      <div class="cards">
+        <div class="card">
+          <div class="icon">🤝</div>
+          <h3>やさしい伝え方</h3>
+          <p>
+            専門的な内容でも、受け手に合わせて無理なく読める形へ整えます。
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🔍</div>
+          <h3>整理しやすい構成</h3>
+          <p>
+            情報が散らばらないよう、扱いやすい形で整理することを重視します。
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🌼</div>
+          <h3>小さく始めやすい</h3>
+          <p>
+            PoCや試験導入から始められる、やわらかい進め方を大切にしています。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="company">
+    <div class="container company-wrap">
+      <h2 class="section-title">会社情報</h2>
+      <p class="section-lead">
+        ここは正式情報が決まり次第、あとで差し替えれば大丈夫です。
+      </p>
+
+      <div class="company-info">
+        <dl>
+          <dt>会社名</dt>
+          <dd>めでぃまる株式会社（仮）</dd>
+
+          <dt>所在地</dt>
+          <dd>東京都〇〇区〇〇</dd>
+
+          <dt>事業内容</dt>
+          <dd>医療・介護領域における情報整理支援、レポート設計、PoC支援</dd>
+
+          <dt>設立予定</dt>
+          <dd>2026年予定</dd>
+
+          <dt>お問い合わせ</dt>
+          <dd>contact@example.com</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <div class="cta">
+        <h2 class="section-title">ご相談・お問い合わせ</h2>
+        <p>
+          サービスのご相談、協業のご連絡、導入に関するご質問など、
+          お気軽にお問い合わせください。
+        </p>
+        <a href="mailto:contact@example.com" class="btn btn-primary">メールで問い合わせる</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      © 2026 めでぃまる. All rights reserved.
+    </div>
+  </footer>
+
 </body>
 </html>
